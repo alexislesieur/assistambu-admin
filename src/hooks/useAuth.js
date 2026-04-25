@@ -7,7 +7,10 @@ export function useAuth() {
 
   const fetchUser = useCallback(async () => {
     const token = localStorage.getItem('token')
-    if (!token) { setLoading(false); return }
+    if (!token) {
+      window.location.href = import.meta.env.VITE_AUTH_URL || 'https://auth.assist-ambu.fr/login'
+      return
+    }
 
     try {
       const data = await authApi.me()
@@ -29,11 +32,17 @@ export function useAuth() {
     // Récupère le token depuis l'URL si présent (redirect depuis auth)
     const params = new URLSearchParams(window.location.search)
     const tokenFromUrl = params.get('token')
+
     if (tokenFromUrl) {
       localStorage.setItem('token', tokenFromUrl)
       window.history.replaceState({}, '', window.location.pathname)
+      fetchUser()
+    } else if (!localStorage.getItem('token')) {
+      // Pas de token — redirect immédiat vers auth
+      window.location.href = import.meta.env.VITE_AUTH_URL || 'https://auth.assist-ambu.fr/login'
+    } else {
+      fetchUser()
     }
-    fetchUser()
   }, [fetchUser])
 
   const logout = async () => {
