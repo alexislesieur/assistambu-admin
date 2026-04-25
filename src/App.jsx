@@ -7,6 +7,7 @@ import InterventionsPage from './pages/InterventionsPage'
 import SacPage from './pages/SacPage'
 import HospitalsPage from './pages/HospitalsPage'
 import WaitlistPage from './pages/WaitlistPage'
+import LogsPage from './pages/LogsPage'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/sac"           element={<SacPage />} />
           <Route path="/hospitals"     element={<HospitalsPage />} />
           <Route path="/waitlist"      element={<WaitlistPage />} />
+          <Route path="/logs"          element={<LogsPage />} />
         </Routes>
       </AdminLayout>
     </BrowserRouter>
