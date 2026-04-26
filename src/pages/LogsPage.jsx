@@ -78,7 +78,7 @@ function LogModal({ log, onClose }) {
             { label: 'ID',          value: `#${log.id}` },
             { label: 'Action',      value: log.action },
             { label: 'Niveau',      value: <Badge label={levelStyle.label} color={levelStyle.color} bg={levelStyle.bg} /> },
-            { label: 'Utilisateur', value: log.user ? `${log.user.name} (${log.user.email})` : 'Système' },
+            { label: 'Utilisateur', value: log.user ? log.user.email : 'Système' },
             { label: 'Entité',      value: log.entity_type ? `${log.entity_type} #${log.entity_id}` : '—' },
             { label: 'IP',          value: log.ip || '—' },
             { label: 'User Agent',  value: log.user_agent || '—' },
@@ -239,7 +239,7 @@ export default function LogsPage() {
                   {formatDate(log.created_at)}
                 </span>
                 <span style={{ fontSize: 12, color: '#4A5568', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {log.user ? log.user.name : <span style={{ color: '#B0BFCC', fontStyle: 'italic' }}>Système</span>}
+                  {log.user ? log.user.email : <span style={{ color: '#B0BFCC', fontStyle: 'italic' }}>Système</span>}
                 </span>
                 <span style={{ fontSize: 12, fontWeight: 600, color: '#0A1E3D' }}>{actionLabel.label}</span>
                 <div><Badge label={levelStyle.label} color={levelStyle.color} bg={levelStyle.bg} /></div>
